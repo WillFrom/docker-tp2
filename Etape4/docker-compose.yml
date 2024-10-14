@@ -1,0 +1,44 @@
+#version: '3.8'
+
+services:
+  wordpress:
+    build:
+      context: ./php
+    container_name: script
+    volumes:
+      - ./app:/app
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: ./http
+    container_name: http
+    ports:
+      - "8080:80"
+    depends_on:
+      - wordpress
+    volumes:
+      - ./app:/app
+    networks:
+      - app-network
+
+  db:
+    image: mysql:5.7
+    container_name: data
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppassword
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
