@@ -7,13 +7,13 @@ docker run -d --name mariadb-container --network my_network -e MYSQL_ROOT_PASSWO
 http:
 docker run -d --name http --network my_network -p 8080:80 \
 -v "C:\Users\neila\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape2\http\default.conf:/etc/nginx/conf.d/default.conf" \
--v "C:\Users\neila\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape2\app:/app" \
+-v "C:\Users\natali\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape2\app:/app" \
 nginx
 # Ce conteneur exécute NGINX, expose le port 8080 et utilise un fichier de configuration personnalisé pour pointer vers l'application
 
 
 php:
-docker run -d --name script --network my_network -v "C:\Users\neila\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape2\app:/app" php:7.4-fpm
+docker run -d --name script --network my_network -v "C:\Users\natali\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape2\app:/app" php:7.4-fpm
 # Ce conteneur exécute PHP avec FPM, partage le même volume que HTTP pour que NGINX puisse y accéder
 
 Affichage de docker
@@ -52,9 +52,9 @@ docker run -d --name http --network my_network -p 8080:80 -v "C:\Users\neila\One
 Inspecter le réseau
 docker network inspect my_network
 
-docker run -d --name script -v "C:\Users\neila\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape3/"wordpress:/var/www/html php:7.4-fpm
+docker run -d --name script -v "C:\Users\natali\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape3/"wordpress:/var/www/html php:7.4-fpm
 
-docker run -d --name http -p 8080:80 -v "C:\Users\neila\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape3/http\default.conf:/etc/nginx/conf.d/default.conf"/nginx.conf:/etc/nginx/conf.d/default.conf -v "C:\Users\neila\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape3/http\default.conf:/etc/nginx/conf.d/default.conf" wordpress:/var/www/html --link script:script nginx:latest
+docker run -d --name http -p 8080:80 -v "C:\Users\natali\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape3/http\default.conf:/etc/nginx/conf.d/default.conf"/nginx.conf:/etc/nginx/conf.d/default.conf -v "C:\Users\natali\OneDrive\Bureau\Documents\EFREI\ML OPS\docker-tp2\Etape3/http\default.conf:/etc/nginx/conf.d/default.conf" wordpress:/var/www/html --link script:script nginx:latest
 
 
 
